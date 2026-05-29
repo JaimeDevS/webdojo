@@ -46,3 +46,9 @@ Cypress.Commands.add('goTo', (buttonName, pageTitle) => {
     cy.contains('h1', pageTitle)
         .should('be.visible')
 })
+
+// Helpers
+Cypress.Commands.add('login', () => {
+    cy.start()
+    cy.submitLoginForm('papito@webdojo.com', 'katana123')
+})

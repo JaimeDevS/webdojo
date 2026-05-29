@@ -1,23 +1,21 @@
 describe('Formulário de Consultoria', () => {
 
-    before(() => {
-        cy.log('Isso acontece antes de todos os testes uma única vez.')
-    })
+    // before(() => {
+    //     cy.log('Isso acontece antes de todos os testes uma única vez.')
+    // })
 
     beforeEach(() => {
-        cy.start()
-        cy.submitLoginForm('papito@webdojo.com', 'katana123')
-
+        cy.login()
         cy.goTo('Formulários', 'Consultoria')
     })
 
-    afterEach(() => {
-        cy.log('Isso acontece depois de cada teste')
-    })
+    // afterEach(() => {
+    //     cy.log('Isso acontece depois de cada teste')
+    // })
 
-    after(() => {
-        cy.log('Isso acontece depois de todos os testes uma única vez.')
-    })
+    // after(() => {
+    //     cy.log('Isso acontece depois de todos os testes uma única vez.')
+    // })
 
     it('Deve solicitar consultoria individual', () => {
         cy.get('#name').type('Fernando Papito')
