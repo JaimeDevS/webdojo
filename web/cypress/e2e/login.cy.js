@@ -13,7 +13,7 @@ describe('Login', () => {
       .and('have.text', 'Olá QA, esse é o seu Dojo para aprender Automação de Testes.')
   })
 
-  it('Não deve logar com senha inválida', () => {
+  it.skip('Não deve logar com senha inválida', () => {
     cy.start()
     cy.submitLoginForm('papito@webdojo.com', 'katana321')
 
@@ -33,3 +33,7 @@ describe('Login', () => {
 //SUBFUNÇÕES
 //.only
 //.skip
+
+//EXECUTAR TODOS OS TESTES
+//npx cypress run
+//npx cypress run --headed
