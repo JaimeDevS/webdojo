@@ -29,3 +29,7 @@ describe('Login', () => {
       .should('be.visible')
   })
 })
+
+//SUBFUNÇÕES
+//.only
+//.skip
