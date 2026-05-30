@@ -7,6 +7,8 @@ describe('Formulário de Consultoria', () => {
     beforeEach(() => {
         cy.login()
         cy.goTo('Formulários', 'Consultoria')
+
+        cy.fixture('consultancy').as('consultancyData')
     })
 
     // afterEach(() => {
@@ -17,25 +19,9 @@ describe('Formulário de Consultoria', () => {
     //     cy.log('Isso acontece depois de todos os testes uma única vez.')
     // })
 
-    it('Deve solicitar consultoria individual', () => {
+    it('Deve solicitar consultoria individual', function() {
 
-        const consultancyForm = {
-            name: 'Fernando Papito',
-            email: 'papito@teste.com.br',
-            phone: '11 99999-9999',
-            consultancyType: 'Individual',
-            personType: 'cpf',
-            document: '54728393003',
-            discoveryChannels: [
-                'Instagram', 'LinkedIn', 'Udemy', 'YouTube', 'Indicação de Amigo'
-            ],
-            file: './cypress/fixtures/document.pdf',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            techs: [
-                'Cypress', 'Selenium', 'WebDriverIO', 'Playwright', 'Robot Framework'
-            ],
-            terms: true,
-        }
+        const consultancyForm = this.consultancyData.personal
 
         cy.get('#name').type(consultancyForm.name)
         cy.get('#email').type(consultancyForm.email)
@@ -125,26 +111,10 @@ describe('Formulário de Consultoria', () => {
 
     })
 
-    it.only('Deve solicitar consultoria In Company', () => {
+    it('Deve solicitar consultoria In Company', function() {
 
-        const consultancyForm = {
-            name: 'Fernando Papito',
-            email: 'papito@teste.com.br',
-            phone: '11 99999-9999',
-            consultancyType: 'In Company',
-            personType: 'cnpj',
-            document: '52138313000104',
-            discoveryChannels: [
-                'LinkedIn',
-            ],
-            file: './cypress/fixtures/document.pdf',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            techs: [
-                'Cypress', 
-            ],
-            terms: true,
-        }
-
+        const consultancyForm = this.consultancyData.company
+        
         cy.get('#name').type(consultancyForm.name)
         cy.get('#email').type(consultancyForm.email)
         cy.get('input[placeholder="(00) 00000-0000"]')
