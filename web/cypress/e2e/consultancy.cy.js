@@ -22,29 +22,22 @@ describe('Formulário de Consultoria', () => {
     it('Deve verificar os campos obrigatórios', () => {
         cy.submitConsultancyForm()
 
-        cy.contains('label', 'Nome Completo')
-            .parent()
-            .find('p')
-            .should('have.text', 'Campo obrigatório')
-            .should('be.visible')
-            .and('have.class', 'text-red-400')
-            .and('have.css', 'color', 'rgb(248, 113, 113)')
+        const requiredFields = [
+            { label: 'Nome Completo', message: 'Campo obrigatório' },
+            { label: 'Email', message: 'Campo obrigatório' },
+            { label: 'termos de uso', message: 'Você precisa aceitar os termos de uso' }
+        ]
 
-        cy.contains('label', 'Email')
-            .parent()
-            .find('p')
-            .should('have.text', 'Campo obrigatório')
-            .should('be.visible')
-            .and('have.class', 'text-red-400')
-            .and('have.css', 'color', 'rgb(248, 113, 113)')
+        requiredFields.forEach(({ label, message }) => {
+            cy.contains('label', label)
+                .parent()
+                .find('p')
+                .should('have.text', message)
+                .should('be.visible')
+                .and('have.class', 'text-red-400')
+                .and('have.css', 'color', 'rgb(248, 113, 113)')
+        })
 
-        cy.contains('label', 'termos de uso')
-            .parent()
-            .find('p')
-            .should('have.text', 'Você precisa aceitar os termos de uso')
-            .should('be.visible')
-            .and('have.class', 'text-red-400')
-            .and('have.css', 'color', 'rgb(248, 113, 113)')
     })
 })
 
