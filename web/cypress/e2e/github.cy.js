@@ -6,8 +6,6 @@ describe('Gerenciamento de Perfis no Github', () => {
     })
 
     it('Deve poder cadastrar um novo perfil do github', () => {
-        cy.log('todo')
-
         cy.get('#name').type('Fernando Papito')
         cy.get('#username').type('qapapito')
         cy.get('#profile').type('QA')
@@ -31,6 +29,31 @@ describe('Gerenciamento de Perfis no Github', () => {
         cy.get('@trProfile')
             .contains('td','QA')
             .should('be.visible')
+
+    })
+
+    it.only('Deve poder remover um perfil do github', () => {
+
+        const profile = { 
+            name: 'Fernando Papito',
+            username: 'papito123',
+            desc: 'QA'
+        }
+
+        cy.get('#name').type(profile.name)
+        cy.get('#username').type(profile.username)
+        cy.get('#profile').type(profile.desc)
+
+        cy.contains('button', 'Adicionar Perfil').click()
+
+        cy.contains('table tbody tr', profile.username)
+            .should('be.visible')
+            .as('trProfile')
+
+        cy.get('@trProfile').find('button[title="Remover perfil"]').click()
+
+        cy.contains('table tbody', profile.username)
+            .should('not.exist')
 
     })
 
