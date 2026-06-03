@@ -27,14 +27,14 @@ describe('Gerenciamento de Perfis no Github', () => {
             .should('be.visible')
 
         cy.get('@trProfile')
-            .contains('td','QA')
+            .contains('td', 'QA')
             .should('be.visible')
 
     })
 
-    it.only('Deve poder remover um perfil do github', () => {
+    it('Deve poder remover um perfil do github', () => {
 
-        const profile = { 
+        const profile = {
             name: 'Fernando Papito',
             username: 'papito123',
             desc: 'QA'
@@ -54,6 +54,31 @@ describe('Gerenciamento de Perfis no Github', () => {
 
         cy.contains('table tbody', profile.username)
             .should('not.exist')
+
+    })
+
+    it.only('Deve validar o link do github', () => {
+
+        const profile = {
+            name: 'Fernando Papito',
+            username: 'papitodev',
+            desc: 'QA'
+        }
+
+        cy.get('#name').type(profile.name)
+        cy.get('#username').type(profile.username)
+        cy.get('#profile').type(profile.desc)
+
+        cy.contains('button', 'Adicionar Perfil').click()
+
+        cy.contains('table tbody tr', profile.username)
+            .should('be.visible')
+            .as('trProfile')
+
+        cy.get('@trProfile')
+            .find('a')
+            .should('have.attr', 'href', 'https://github.com/' + profile.username)
+            .and('have.attr', 'target', '_blank')
 
     })
 
