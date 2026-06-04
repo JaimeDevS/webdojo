@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "serve -s dist -p 3000"
+    "dev": "serve -s dist -p 3000",
+    "test":  "npx cypress run"
   },
   "dependencies": {
     "cypress-real-events": "^1.15.0",
