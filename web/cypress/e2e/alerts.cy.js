@@ -39,7 +39,7 @@ describe('validações de alertas em JavaScripts', () => {
         cy.contains('button', 'Mostrar Confirm').click()
     })
 
-    it.only('Deve interagir com um prompt, inserir um texto e validar uma mensagem', () => {
+    it('Deve interagir com um prompt, inserir um texto e validar uma mensagem', () => {
         cy.window().then((win) => {
             cy.stub(win, 'prompt').returns('Fernando')
         })
