@@ -2,7 +2,7 @@ import { getTodayDate } from '../support/utils'
 
 describe('Login', () => {
 
-  it.only('Deve logar com sucesso', () => {
+  it('Deve logar com sucesso', () => {
     cy.start()
     cy.submitLoginForm('papito@webdojo.com', 'katana123')
     //cy.wait(3000) 
@@ -55,3 +55,6 @@ describe('Login', () => {
 
 //MUDAR DE NAVEGADOR
 //npx cypress run --browser=chrome
+
+//RODANDO UMA SUITE DE TESTE ESPECÍFICA
+//npx cypress run --spec cypress/e2e/login.cy.js

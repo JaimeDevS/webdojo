@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "serve -s dist -p 3000",
     "test":  "npx cypress run",
-    "test:ui":  "npx cypress open"
+    "test:ui":  "npx cypress open",
+    "test:login": "npx cypress run --spec cypress/e2e/login.cy.js"
   },
   "dependencies": {
     "cypress-real-events": "^1.15.0",
