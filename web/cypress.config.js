@@ -8,5 +8,6 @@ module.exports = defineConfig({
     experimentalStudio: true,
     //video: true
     //defaultCommandTimeout: 10000
+    baseUrl: 'http://localhost:3000'
   },
 });

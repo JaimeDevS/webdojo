@@ -32,7 +32,7 @@ import { getTodayDate } from './utils'
 
 Cypress.Commands.add('start', () => {
     cy.viewport(1440, 900)
-    cy.visit('http://localhost:3000')
+    cy.visit('/')
 })
 
 Cypress.Commands.add('submitLoginForm', (email, senha) => {
@@ -62,7 +62,7 @@ Cypress.Commands.add('login', (ui = false) => {
 
         cy.setCookie('login_data', loginDate)
 
-        cy.visit('http://localhost:3000/dashboard', {
+        cy.visit('/dashboard', {
             onBeforeLoad(win) {
                 win.localStorage.setItem('token', token)
             }
