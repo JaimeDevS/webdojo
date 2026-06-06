@@ -70,3 +70,4 @@ app.listen(port, () => {
 //wsl -d Ubuntu
 //----------------------//
 // docker compose up
+//npm install cypress@14.3.1 -D

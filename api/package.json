@@ -19,6 +19,7 @@
     "prisma": "^5.22.0"
   },
   "devDependencies": {
+    "cypress": "^14.3.1",
     "nodemon": "^3.1.14"
   }
 }
