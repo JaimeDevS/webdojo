@@ -9,7 +9,7 @@ describe('POST /api/users/register', () => {
       password: 'pwd123'
     }
 
-    cy.request({
+    cy.api({
       method: 'POST',
       url: 'http://localhost:3333/api/users/register',
       body: {
@@ -19,6 +19,11 @@ describe('POST /api/users/register', () => {
       }
     }).then((response) => {
       expect(response.status).to.eq(201)
+      //cy.log(JSON.stringify(response.body))
+      expect(response.body.message).to.eq('User registered successfully.')
+      //expect(response.body.user.id.toString()).to.match(/^\d+$/)
+      expect(response.body.user.name).to.eq(user.name)
+      expect(response.body.user.email).to.eq(user.email)
     })
 
   })

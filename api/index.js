@@ -6,11 +6,10 @@ const prisma = require('./prismaClient')
 
 // Habilita cors paa todas as origens
 app.use(cors())
-
 app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.json({message: "API do curso Ninja do Cypress"})
+    res.json({ message: "API do curso Ninja do Cypress" })
 })
 
 app.post('/api/users/register', async (req, res) => {
@@ -18,15 +17,21 @@ app.post('/api/users/register', async (req, res) => {
     const { name, email, password } = req.body
 
     if (!name) {
-        return res.status(400).json({ error: 'Name is required!' })
+        return res.status(400).json({
+            error: 'The "name" field is required.'
+        })
     }
 
     if (!email) {
-        return res.status(400).json({ error: 'Email is required!' })
+        return res.status(400).json({
+            error: 'The "email" field is required.'
+        })
     }
 
     if (!password) {
-        return res.status(400).json({ error: 'Password is required!' })
+        return res.status(400).json({
+            error: 'The "password" field is required.'
+        })
     }
 
     try {
@@ -39,19 +44,24 @@ app.post('/api/users/register', async (req, res) => {
         })
 
         return res.status(201).json({
-            message: 'Usuário cadastrado com sucesso!',
+            message: 'User registered successfully.',
             user
         })
 
     } catch (error) {
 
-        // erro comum: email duplicado
+        // Prisma unique constraint violation
         if (error.code === 'P2002') {
-            return res.status(400).json({ error: 'Email já cadastrado!' })
+            return res.status(409).json({
+                error: 'A user with this email address already exists.'
+            })
         }
 
         console.error(error)
-        return res.status(500).json({ error: 'Erro interno!' })
+
+        return res.status(500).json({
+            error: 'An unexpected internal server error occurred.'
+        })
     }
 })
 
@@ -73,3 +83,5 @@ app.listen(port, () => {
 // npm install cypress@14.3.1 -D
 // https://fakerjs.dev/
 // npm install @faker-js/faker --save-dev
+// npm i cypress-plugin-api -D
+// https://www.npmjs.com/package/cypress-plugin-api
