@@ -59,15 +59,17 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
 
-//HOT RELOAD - "dev": "nodemon index.js",
-//npm install nodemon -D
-//npm install cors
+// HOT RELOAD - "dev": "nodemon index.js",
+// npm install nodemon -D
+// npm install cors
 //----------------------//
-//PARA WINDOWS
-//wsl --install
-//wsl --list --online
-//wsl --install ubuntu
-//wsl -d Ubuntu
+// PARA WINDOWS
+// wsl --install
+// wsl --list --online
+// wsl --install ubuntu
+// wsl -d Ubuntu
 //----------------------//
 // docker compose up
-//npm install cypress@14.3.1 -D
+// npm install cypress@14.3.1 -D
+// https://fakerjs.dev/
+// npm install @faker-js/faker --save-dev
