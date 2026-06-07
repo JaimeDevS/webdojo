@@ -94,3 +94,4 @@ app.listen(port, () => {
 // npm install @faker-js/faker --save-dev
 // npm i cypress-plugin-api -D
 // https://www.npmjs.com/package/cypress-plugin-api
+// npm i pg-promise -D

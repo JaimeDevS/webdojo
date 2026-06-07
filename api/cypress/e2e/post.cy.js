@@ -1,14 +1,16 @@
-import { faker } from '@faker-js/faker'
+//import { faker } from '@faker-js/faker'
 
 describe('POST /api/users/register', () => {
 
-  it('deve cadastrar um novo usuário', () => {
+  it('Deve cadastrar um novo usuário', () => {
 
     const user = {
-      name: faker.person.fullName(),
-      email: faker.internet.email(),
+      name: 'Wolverine',
+      email: 'logan@xmen.com',
       password: 'pwd123'
     }
+
+    cy.task('deleteUser', user.email)
 
     cy.api({
       method: 'POST',
@@ -29,11 +31,13 @@ describe('POST /api/users/register', () => {
   it('Não deve cadastrar com email duplicado', () => {
 
     const user = {
-      name: faker.person.fullName(),
-      email: faker.internet.email(),
+      name: 'Ciclops',
+      email: 'scott@xmen.com',
       password: 'pwd123'
     }
 
+    cy.task('deleteUser', user.email)
+    
     cy.postUser(user).then((response) => {
       expect(response.status).to.eq(201)
     })
@@ -47,7 +51,7 @@ describe('POST /api/users/register', () => {
 
   it('O campo name deve ser obrigatório', () => {
     const user = {
-      email: 'papito@teste.com.br',
+      email: 'storm@xmen.com',
       password: 'pwd123'
     }
 
@@ -60,7 +64,7 @@ describe('POST /api/users/register', () => {
 
   it('O campo email deve ser obrigatório', () => {
     const user = {
-      name: 'Fernandi Papito',
+      name: 'Jean Grey',
       password: 'pwd123'
     }
 
@@ -73,8 +77,8 @@ describe('POST /api/users/register', () => {
 
   it('O campo senha deve ser obrigatório', () => {
     const user = {
-      name: 'Fernandi Papito',
-      email: 'papito@teste.com.br'
+      name: 'Charles Xavier',
+      email: 'xavier@xmen.com'
     }
 
     cy.postUser(user).then((response) => {
@@ -86,8 +90,8 @@ describe('POST /api/users/register', () => {
 
   it('Não deve passar quando o JSON está mal formatado', () => {
     const user = `{
-      name: 'Fernandi Papito',
-      email: 'papito@teste.com.br'
+      name: 'Magneto',
+      email: 'erik@xmen.com'
       password: 'pwd123'
     }`
 
