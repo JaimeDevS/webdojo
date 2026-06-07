@@ -8,6 +8,15 @@ const prisma = require('./prismaClient')
 app.use(cors())
 app.use(express.json())
 
+// Middleware para pegar erros de requisições e exibir no bash
+app.use((err, req, res, next) => {
+    //console.log(err)
+    if (err instanceof SyntaxError) {
+        return res.status(400).json({ error: 'Invalid JSON format.' })
+    }
+    next()
+})
+
 app.get('/', (req, res) => {
     res.json({ message: "API do curso Ninja do Cypress" })
 })
