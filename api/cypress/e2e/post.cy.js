@@ -84,6 +84,19 @@ describe('POST /api/users/register', () => {
     })
   })
 
+  it('Não deve passar quando o JSON está mal formatado', () => {
+    const user = `{
+      name: 'Fernandi Papito',
+      email: 'papito@teste.com.br'
+      password: 'pwd123'
+    }`
+
+    cy.postUser(user).then((response) => {
+      expect(response.status).to.eq(400)
+      expect(response.body.error).to.eq('Invalid JSON format.')
+    })
+  })
+
 })
 
 Cypress.Commands.add('postUser', (user) => {
@@ -91,6 +104,9 @@ Cypress.Commands.add('postUser', (user) => {
     method: 'POST',
     url: 'http://localhost:3333/api/users/register',
     body: user,
+    headers: {
+      'Content-type': 'application/json'
+    },
     failOnStatusCode: false
   })
 })
