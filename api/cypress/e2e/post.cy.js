@@ -102,15 +102,3 @@ describe('POST /api/users/register', () => {
   })
 
 })
-
-Cypress.Commands.add('postUser', (user) => {
-  return cy.api({
-    method: 'POST',
-    url: 'http://localhost:3333/api/users/register',
-    body: user,
-    headers: {
-      'Content-type': 'application/json'
-    },
-    failOnStatusCode: false
-  })
-})
