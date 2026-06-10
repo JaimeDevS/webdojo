@@ -118,6 +118,15 @@ app.put('/api/users/:id', async (req, res) => {
     }
 
     try {
+
+        const user = await prisma.user.findUnique({
+            where: { id: id }
+        })
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found.' })
+        }
+
         await prisma.user.update({
             where: { id: id },
             data: {
@@ -131,6 +140,26 @@ app.put('/api/users/:id', async (req, res) => {
     }
 
     res.end()
+})
+
+app.delete('/api/users/:id', async (req, res) => {
+    const { id } = req.params
+
+    try {
+
+        const user = await prisma.user.findUnique({
+            where: { id: id }
+        })
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found.' })
+        }
+
+        await prisma.user.delete({ where: { id: id } })
+        return res.status(204).end()
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete user :( \\n' + error })
+    }
 })
 
 app.listen(port, () => {
