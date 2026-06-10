@@ -94,6 +94,45 @@ app.get('/api/users', async (req, res) => {
 
 })
 
+app.put('/api/users/:id', async (req, res) => {
+
+    const { id } = req.params
+    const { name, email, password } = req.body
+
+    if (!name) {
+        return res.status(400).json({
+            error: 'The "name" field is required.'
+        })
+    }
+
+    if (!email) {
+        return res.status(400).json({
+            error: 'The "email" field is required.'
+        })
+    }
+
+    if (!password) {
+        return res.status(400).json({
+            error: 'The "password" field is required.'
+        })
+    }
+
+    try {
+        await prisma.user.update({
+            where: { id: id },
+            data: {
+                name, email, password
+            }
+        })
+
+        res.status(204).end()
+    } catch (error) {
+        res.status(500).json({ error: 'Error updating user :( \\n' + error })
+    }
+
+    res.end()
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })

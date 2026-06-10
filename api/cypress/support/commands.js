@@ -47,3 +47,15 @@ Cypress.Commands.add('getUsers', () => {
         failOnStatusCode: false
     })
 })
+
+Cypress.Commands.add('putUser', (userId, updatedUser) => {
+    return cy.api({
+        method: 'PUT',
+        url: 'http://localhost:3333/api/users/' + userId,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: updatedUser,
+        failOnStatusCode: false
+    })
+})
