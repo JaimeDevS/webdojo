@@ -18,8 +18,8 @@ describe('Expert', () => {
             .should('be.visible')
     })
 
-    it.only('Não deve logar com senha inválida', () => {
-        cy.submitLoginForm('papito@webdojo.com', 'katana321')
+    it('Não deve logar com senha inválida', () => {
+        //cy.submitLoginForm('papito@webdojo.com', 'katana321')
 
         //técnica para obter o HTML
         // cy.wait(2500)
@@ -27,6 +27,10 @@ describe('Expert', () => {
         // cy.document().then((doc) => {
         //     cy.writeFile('cypress/downloads/page.html', doc.documentElement.outerHTML)
         // })
+
+        cy.get('#email').type('papito@webdojo.com')
+        cy.get('#password').type('asdf{Enter}')
+        
 
         cy.get('[data-sonner-toaster=true]')
             .should('be.visible')
@@ -40,5 +44,13 @@ describe('Expert', () => {
 
         cy.get('@toast')
             .should('not.exist')
+    })
+
+    it('Simulando a tecla TAB com cy.press()', () => {
+        cy.get('body').press('Tab')
+        cy.focused().should('have.attr', 'id', 'email')
+
+        cy.get('#email').press('Tab')
+        cy.focused().should('have.attr', 'id', 'password')
     })
 })
